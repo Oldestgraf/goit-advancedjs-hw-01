@@ -1,7 +1,6 @@
 import images from './imagesData.json';
 import { createGalleryImagesTemplate } from './render-functions';
 import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
 
 const galleryList = document.querySelector(".gallery")
 galleryList.innerHTML = createGalleryImagesTemplate(images);

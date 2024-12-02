@@ -1,6 +1,5 @@
 import { save, load } from "./localStorage";
 import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
 
 document.body.style.fontFamily = "'Montserrat', sans-serif";
 const form = document.querySelector("form");
