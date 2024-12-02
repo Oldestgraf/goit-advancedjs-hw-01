@@ -10,23 +10,23 @@ const textarea = document.querySelector("textarea");
 const submitButton = document.querySelector("button")
 
 const formData = {
-  email: '',
-  message: '',
+    email: '',
+    message: '',
 };
 
 const fillFormField = () => {
-  const formDataFromLS = load('feedback-form-state');
+    const formDataFromLS = load('feedback-form-state');
 
-  if (formDataFromLS === undefined) {
-    return;
-  }
+    if (formDataFromLS === undefined) {
+        return;
+    }
 
-  const formDataFromLSKeys = Object.keys(formDataFromLS);
+    const formDataFromLSKeys = Object.keys(formDataFromLS);
 
-  formDataFromLSKeys.forEach(key => {
-    form.elements[key].value = formDataFromLS[key];
-    formData[key] = formDataFromLS[key];
-  });
+    formDataFromLSKeys.forEach(key => {
+        form.elements[key].value = formDataFromLS[key];
+        formData[key] = formDataFromLS[key];
+    });
 
   console.log(formData);
 };
@@ -34,34 +34,36 @@ const fillFormField = () => {
 fillFormField();
 
 const onFormFieldChange = event => {
-  const { target: formField } = event;
+    const { target: formField } = event;
 
-  const fieldName = formField.name;
-  const fieldValue = formField.value;
+    const fieldName = formField.name;
+    const fieldValue = formField.value;
 
-  formData[fieldName] = fieldValue;
+    formData[fieldName] = fieldValue;
 
-  save('feedback-form-state', formData);
+    save('feedback-form-state', formData);
 };
 
 const onFeedbackFormSubmit = event => {
-  event.preventDefault();
+    event.preventDefault();
 
     const formDataValues = Object.values(formData);
 
-  if (formDataValues.some(el => el === '')) {
-    iziToast.error({
-      message: 'Fill please all fields',
-      position: 'topRight',
-    });
-    return;
-  }
+    if (formDataValues.some(el => el === '')) {
+        iziToast.error({
+        message: 'Fill please all fields',
+        position: 'topRight',
+        });
+        return;
+    }
+    
+    console.log(formData);
 
-  event.currentTarget.reset();
-  localStorage.removeItem('feedback-form-state');
+    event.currentTarget.reset();
+    localStorage.removeItem('feedback-form-state');
 };
 
-form.addEventListener('change', onFormFieldChange);
+form.addEventListener('input', onFormFieldChange);
 form.addEventListener('submit', onFeedbackFormSubmit);
 
 form.style.display = "inline-flex";
